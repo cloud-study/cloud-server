@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: config-server
+
+  cloud:
+    config:
+      enabled: true
+      server:
+        git:
+          uri: https://github.com/lycy/cloudConfig.git
+          searchPaths: '{profile}'
+#          username: xxx
+#          password: xxx
+        bootstrap: true
+
+server:
+  port: 8888
+
+
