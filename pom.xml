@@ -13,6 +13,8 @@
 
 	<modules>
 		<module>register-server</module>
+		<module>config-server</module>
+		<module>api-gateway</module>
 	</modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
