@@ -7,13 +7,31 @@ spring:
       enabled: true
       server:
         git:
-          uri: https://github.com/lycy/cloudConfig.git
+          uri: ${CONFIG_URL:https://github.com/lycy/cloudConfig.git}
           searchPaths: '{profile}'
 #          username: xxx
 #          password: xxx
         bootstrap: true
-
+#    stream:
+#      bindings:
+#        springCloudBusInput:
+#          group: config-server
+#          consumer:
+#            autoBindDlq: true
 server:
-  port: 8888
+  port: ${PORT:8888}
+
+
+eureka:
+  instance:
+    hostname: config-server
+    preferIpAddress: true
+  client:
+    serviceUrl:
+#      defaultZone: http://register-server:8761/eureka/
+      defaultZone: ${REGISTER_SERVER_URL:http://localhost:8761/eureka/}
+security:
+  basic:
+    enabled: false
 
 

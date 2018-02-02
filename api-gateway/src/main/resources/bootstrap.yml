@@ -10,13 +10,14 @@ spring:
         service-id: config-server
         enabled: true
 server:
-  port: 8080
+  port: ${PORT:8080}
+  connection-timeout: 3600000
 
 eureka:
   client:
     serviceUrl:
       #指定服务注册中心的位置
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: ${REGISTER_SERVER_URL:http://localhost:8761/eureka/}
   instance:
     prefer-ip-address: true
     hostname: api-gateway

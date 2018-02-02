@@ -36,6 +36,36 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<!-- rabbitmq  -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-bus-amqp</artifactId>
+		</dependency>
+
+		<!-- stream-rabbit -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-stream-rabbit</artifactId>
+		</dependency>
+		<!-- aspectj -->
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>1.8.9</version>
+		</dependency>
+
+		<!-- feign service -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-feign</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.cloud</groupId>
+			<artifactId>common</artifactId>
+		</dependency>
+
 	</dependencies>
 
 	<build>
