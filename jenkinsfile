@@ -1,0 +1,35 @@
+#!groovy
+
+node {
+    def buildTimestamp = sh(script: 'date +%Y%m%d%H%M%S%Z', returnStdout: true).replaceAll("\r", "").replaceAll("\n", "")
+    def dockerTagName = "docker.io/lyvy/${MODULE_NAME}:${ENV_NAME}.1.0.${buildTimestamp}"
+
+   stage('checkout') {
+    git branch: "${BRANCH_NAME}", url: 'https://github.com/cloud-study/cloud-server.git'
+
+   }
+   stage('build') {
+        dir("${MODULE_NAME}") {
+            sh "mvn clean package -DskipTests"
+            sh "docker build -t ${dockerTagName} -f Dockerfile ."
+        }
+
+   }
+
+   /*
+   stage('push') {
+       docker.withRegistry("https://docker.io/") {
+           docker.image(dockerTagName).push()
+       }
+   }
+
+   stage('rm images') {
+        sh "docker rmi ${dockerTagName}"
+    }
+    */
+
+   stage('deploy') {
+        def config = sh(script: "curl -u '6CB6D3F238EF34413FB0:5NQbgiWpBWDGmHF7UrkZR7PmGyvsaf7GPd51hYXP' -X GET -H 'Content-Type: application/json, Accept: application/json' '${RANCHER_IP}/v2-beta/projects/${ENV_ID}/services/${SERVICE_ID}' | node rancherUpgradeGenerate.js ${dockerTagName} ", returnStdout: true)
+        sh "curl -u '6CB6D3F238EF34413FB0:5NQbgiWpBWDGmHF7UrkZR7PmGyvsaf7GPd51hYXP' -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -d '{\"inServiceStrategy\": {\"launchConfig\": ${config}}, \"toServiceStrategy\":null}' '${RANCHER_IP}/v2-beta/projects/${ENV_ID}/services/${SERVICE_ID}?action=upgrade'"
+   }
+}
