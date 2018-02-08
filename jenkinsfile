@@ -29,7 +29,7 @@ node {
     */
 
    stage('deploy') {
-        def config = sh(script: "curl -u '6CB6D3F238EF34413FB0:5NQbgiWpBWDGmHF7UrkZR7PmGyvsaf7GPd51hYXP' -X GET -H 'Content-Type: application/json, Accept: application/json' '${RANCHER_IP}/v2-beta/projects/${ENV_ID}/services/${SERVICE_ID}' | node rancherUpgradeGenerate.js ${dockerTagName} ", returnStdout: true)
-        sh "curl -u '6CB6D3F238EF34413FB0:5NQbgiWpBWDGmHF7UrkZR7PmGyvsaf7GPd51hYXP' -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -d '{\"inServiceStrategy\": {\"launchConfig\": ${config}}, \"toServiceStrategy\":null}' '${RANCHER_IP}/v2-beta/projects/${ENV_ID}/services/${SERVICE_ID}?action=upgrade'"
+        def config = sh(script: "curl -u 'F7AA8A85E91A383CC162:wf9DALVSLTzNxh9vNeznEuyj8eD9zjjQ8B4i9bzr' -X GET -H 'Content-Type: application/json, Accept: application/json' '${RANCHER_IP}/v2-beta/projects/${ENV_ID}/services/${SERVICE_ID}' | node rancherUpgradeGenerate.js ${dockerTagName} ", returnStdout: true)
+        sh "curl -u 'F7AA8A85E91A383CC162:wf9DALVSLTzNxh9vNeznEuyj8eD9zjjQ8B4i9bzr' -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -d '{\"inServiceStrategy\": {\"launchConfig\": ${config}}, \"toServiceStrategy\":null}' '${RANCHER_IP}/v2-beta/projects/${ENV_ID}/services/${SERVICE_ID}?action=upgrade'"
    }
 }
