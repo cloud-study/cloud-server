@@ -21,3 +21,7 @@ eureka:
   instance:
     prefer-ip-address: true
     hostname: api-gateway
+
+security:
+  basic:
+    enabled: false

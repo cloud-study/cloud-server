@@ -7,17 +7,11 @@ spring:
       enabled: true
       server:
         git:
-          uri: ${CONFIG_URL:https://github.com/lycy/cloudConfig.git}
+          uri: ${CONFIG_URL:https://github.com/cloud-study/cloudConfig.git}
           searchPaths: '{profile}'
 #          username: xxx
 #          password: xxx
         bootstrap: true
-#    stream:
-#      bindings:
-#        springCloudBusInput:
-#          group: config-server
-#          consumer:
-#            autoBindDlq: true
 server:
   port: ${PORT:8888}
 

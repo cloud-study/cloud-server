@@ -50,9 +50,12 @@ public class AccessFilter extends ZuulFilter{
 
         log.debug(String.format("%s request to %s", request.getMethod(), request.getRequestURL().toString()));
 
-        if(request.getHeader("Authorization") == null ||
+        String authBody = request.getHeader("Authorization");
+        if(authBody == null ||
                 !request.getHeader("Authorization").startsWith("Bearer ") ){
             this.unauthorized();
+        }else{
+            context.addZuulRequestHeader("Authorization", authBody);
         }
         return null;
     }
@@ -70,9 +73,7 @@ public class AccessFilter extends ZuulFilter{
             body.put("success", false);
             body.put("total", 0);
             response.getWriter().write(body.toString());
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (JSONException | IOException e) {
             e.printStackTrace();
         }
         context.setSendZuulResponse(false);

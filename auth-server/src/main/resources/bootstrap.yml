@@ -1,0 +1,42 @@
+spring:
+#  application:
+#    name: auth-server
+#  cloud:
+#    config:
+#      name: auth-server
+#      discovery:
+#        service-id: config-server
+#        enabled: true
+#    stream:
+#      bindings:
+#        springCloudBusInput:
+#          group: auth-server
+#          consumer:
+#            autoBindDlq: true
+  datasource:
+    url: jdbc:mysql://localhost:3306/springsecurity?characterEncoding=UTF-8&autoReconnect=true&failOverReadOnly=false&maxReconnects=5&useSSL=false
+    username: root
+    password: admin
+    driver-class-name: com.mysql.jdbc.Driver
+  redis:
+    host: localhost
+    port: 6379
+    database: 15
+server:
+  port: 9998
+  context-path: /oauth-api
+
+oauth2Config:
+  client:
+    clientId: hIQRS6mf1JNGa_L0Tn3mzwmu1R8a
+    clientSecret: kPYkmPZLEzUcKYbuza2svliaUdAa
+    scope: openid
+#
+#eureka:
+#  client:
+#    serviceUrl:
+#      defaultZone: ${REGISTER_SERVER_URL:http://localhost:8761/eureka/}
+#  instance:
+#    prefer-ip-address: true
+#    hostname: auth-server
+
